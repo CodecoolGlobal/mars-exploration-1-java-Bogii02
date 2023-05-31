@@ -47,13 +47,44 @@ public class MapGenerator {
             System.out.println(symbol);
 
             if (randomX + area <= width && randomY + area <= width) {
+                int x = random.nextInt(area);
+                int y = random.nextInt(area);
+
+                //System.out.println(x);
+                //System.out.println(y);
+
                 for (int i = 0; i < area; i++) {
-                    int x = random.nextInt(area);
-                    int y = random.nextInt(area);
 
                     int xCoordinate = randomX + x;
                     int yCoordinate = randomY + y;
                     map[xCoordinate][yCoordinate] = symbol;
+                    System.out.println(xCoordinate + " " + yCoordinate);
+                    //System.out.println("Created");
+
+                    while(true) {
+                        int nextRandomX = x > 0 && x < area ? random.nextInt(-1, 2) : x == area ? random.nextInt(-1, 1) :
+                                random.nextInt(0, 2);
+
+                        //System.out.println(xCoordinate);
+                        int randomNumberInCaseOfXEqualsPreviousX = random.nextInt(2);
+
+                        int nextRandomY = nextRandomX == 0 && randomNumberInCaseOfXEqualsPreviousX == 0 &&
+                                y > 0 && y < area ? -1 :
+                                nextRandomX == 0 && randomNumberInCaseOfXEqualsPreviousX == 1 &&
+                                        y > 0 && y < area ? 1 :
+                                        nextRandomX == 0 && y == 0 ? 1 :
+                                                nextRandomX == 0 && y == area ? -1 :
+                                                        y > 0 && y < area ? random.nextInt(-1, 2) :
+                                                                y == area ? random.nextInt(-1, 1) :
+                                                                        random.nextInt(0, 2);
+
+                        System.out.println(map[xCoordinate + nextRandomX][yCoordinate + nextRandomY]);
+                        if(map[xCoordinate + nextRandomX][yCoordinate + nextRandomY].equals(" ")){
+                            x += nextRandomX;
+                            y += nextRandomY;
+                            break;
+                        }
+                    }
                 }
             }
         }
