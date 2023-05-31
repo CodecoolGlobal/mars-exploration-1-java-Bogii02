@@ -14,7 +14,7 @@ public class MapGenerator {
     private BufferedWriter bufferedWriter;
     private Random random = new Random();
 
-    private int width = random.nextInt(20, 25);
+    private int width = random.nextInt(20, 40);
     private String[][] map = new String[width][width];
 
     private void fillingMapWithSpaces(){
@@ -60,6 +60,24 @@ public class MapGenerator {
                     map[xCoordinate][yCoordinate] = symbol;
                     System.out.println(xCoordinate + " " + yCoordinate);
                     //System.out.println("Created");
+
+                    int pairItemsChance = random.nextInt(10);
+                    System.out.println(pairItemsChance);
+                    if(pairItemsChance == 1){
+                        int j = -1;
+                        while(j < 2){
+                            for(int k = -1; k < 2; k++){
+                                if(xCoordinate + j <= width && xCoordinate + j >= 0 &&
+                                        yCoordinate + k <= width && yCoordinate + k >= 0 &&
+                                        map[xCoordinate + j][yCoordinate + k].equals(" ") ){
+                                    map[xCoordinate + j][yCoordinate + k] = symbol.equals("^") ? "*" : "~";
+                                    j = 2;
+                                    break;
+                                }
+                            j++;
+                            }
+                        }
+                    }
 
                     while(true) {
                         int nextRandomX = x > 0 && x < area ? random.nextInt(-1, 2) : x == area ? random.nextInt(-1, 1) :
