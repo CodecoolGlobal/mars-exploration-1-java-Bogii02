@@ -15,9 +15,18 @@ public class MapGenerator {
     private Random random = new Random();
 
     private int width = random.nextInt(20, 25);
-    private String[][] line = new String[width][width];
+    private String[][] map = new String[width][width];
+
+    private void fillingMapWithSpaces(){
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < width; j++){
+                map[i][j] = " ";
+            }
+        }
+    }
 
     public void creatingMap() {
+        fillingMapWithSpaces();
         while (true) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter a terrain element name: ");
@@ -30,7 +39,12 @@ public class MapGenerator {
 
             int randomX = random.nextInt(width);
             int randomY = random.nextInt(width);
+
+            System.out.println(randomX + " " + randomY);
+
             String symbol = Arrays.stream(Symbol.values()).filter(x -> x.name().equals(terrain.toUpperCase())).toList().get(0).getSymbol();
+
+            System.out.println(symbol);
 
             if (randomX + area <= width && randomY + area <= width) {
                 for (int i = 0; i < area; i++) {
@@ -39,7 +53,7 @@ public class MapGenerator {
 
                     int xCoordinate = randomX + x;
                     int yCoordinate = randomY + y;
-                    line[xCoordinate][yCoordinate] = symbol;
+                    map[xCoordinate][yCoordinate] = symbol;
                 }
             }
         }
@@ -48,14 +62,12 @@ public class MapGenerator {
     public void writingMap() throws IOException {
         fileWriter = new FileWriter("src\\main\\resources\\exploration-4.map");
         bufferedWriter = new BufferedWriter(fileWriter);
-        for (String[] strings : line) {
-            String newLine = Arrays.toString(strings).replaceAll("[^~*#^]", " ");
-            System.out.println(newLine);
-            bufferedWriter.write(newLine);
+        for (String[] strings : map) {
+            System.out.println(String.join("", strings));
+            bufferedWriter.write(String.join("", strings));
             bufferedWriter.newLine();
         }
         bufferedWriter.close();
         fileWriter.close();
     }
 }
-
