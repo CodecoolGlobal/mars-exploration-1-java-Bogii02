@@ -11,8 +11,6 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) throws IOException {
-        Input input = new Input();
-        String fileName = input.getFileName();
         TerrainAndAreas terrainAndAreas = new TerrainAndAreas();
         terrainAndAreas.fillingTerrainUndAreas();
         List<TerrainAndArea> terrainAndAreaList = terrainAndAreas.getTerrainUndAreas();
@@ -21,6 +19,6 @@ public class Application {
         mapGenerator.creatingMap();
         String[][] map = mapGenerator.getMap();
         WriteFile writeFile = new WriteFile();
-        writeFile.writingMap(fileName, map);
+        writeFile.writingMap(map);
     }
 }

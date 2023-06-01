@@ -8,9 +8,9 @@ public class WriteFile {
 
     private FileWriter fileWriter;
     private BufferedWriter bufferedWriter;
-    public void writingMap(String fileName, String[][] map) throws IOException {
+    public void writingMap(String[][] map) throws IOException {
 
-        fileWriter = new FileWriter("C:\\Users\\mehty\\Documents\\gitcodecool\\Java\\mars-exploration-visuals\\src\\main\\resources\\" + fileName + ".map");
+        fileWriter = new FileWriter("C:\\Users\\mehty\\Documents\\gitcodecool\\Java\\mars-exploration-visuals\\src\\main\\resources\\marsget.map");
         bufferedWriter = new BufferedWriter(fileWriter);
         for (String[] strings : map) {
             System.out.println(String.join("", strings));
