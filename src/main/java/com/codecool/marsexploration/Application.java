@@ -1,17 +1,26 @@
 package com.codecool.marsexploration;
 
-import com.codecool.marsexploration.data.Symbol;
+import com.codecool.marsexploration.data.TerrainAndArea;
+import com.codecool.marsexploration.logic.MapGenerator;
+import com.codecool.marsexploration.logic.WriteFile;
+import com.codecool.marsexploration.ui.Input;
+import com.codecool.marsexploration.ui.TerrainAndAreas;
 
 import java.io.IOException;
-import java.util.Random;
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) throws IOException {
-        Random random = new Random();
-        System.out.println(random.nextInt(42));
-
-        MapGenerator mapGenerator = new MapGenerator();
+        Input input = new Input();
+        String fileName = input.getFileName();
+        TerrainAndAreas terrainAndAreas = new TerrainAndAreas();
+        terrainAndAreas.fillingTerrainUndAreas();
+        List<TerrainAndArea> terrainAndAreaList = terrainAndAreas.getTerrainUndAreas();
+        int width = terrainAndAreas.getWidth();
+        MapGenerator mapGenerator = new MapGenerator(terrainAndAreaList, width);
         mapGenerator.creatingMap();
-        mapGenerator.writingMap();
+        String[][] map = mapGenerator.getMap();
+        WriteFile writeFile = new WriteFile();
+        writeFile.writingMap(fileName, map);
     }
 }
