@@ -37,8 +37,6 @@ public class MapGenerator {
                 int horizontalCoordinate = horizontal;
                 map[verticalCoordinate][horizontalCoordinate] = symbol;
 
-                System.out.println(verticalCoordinate + " " + horizontalCoordinate);
-
                 pairingItems(verticalCoordinate, horizontalCoordinate, symbol);
 
                 if (isThereAnEmptyCellAround(verticalCoordinate, horizontalCoordinate)) {
@@ -75,7 +73,6 @@ public class MapGenerator {
 
     private void pairingItems(int verticalCoordinate, int horizontalCoordinate, String symbol) {
         int pairItemsChance = random.nextInt(10);
-        System.out.println(pairItemsChance);
         if (pairItemsChance == 1) {
             int j = -1;
             while (j < 2) {
